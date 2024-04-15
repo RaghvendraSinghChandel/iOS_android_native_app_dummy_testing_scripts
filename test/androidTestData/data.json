@@ -1,0 +1,11 @@
+{
+    "alertListText": {
+        "header": "Header title",
+        "command1": "Command one",
+        "command2": "Command two",
+        "command3": "Commmand three",
+        "command4": "Command four"
+
+    },
+    "asssetReadText" : "This text is stored in a raw Asset."
+}

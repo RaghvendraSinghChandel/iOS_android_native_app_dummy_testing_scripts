@@ -1,0 +1,31 @@
+name: WDIO CI GitHub Action
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+
+    env:
+      BROWSERSTACK_USER: ${{secrets.BS_USER}}
+      BROWSERSTACK_KEY: ${{secrets.BS_KEY}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: actions/setup-node@v2 # Update to the latest version of setup-node
+        with:
+          node-version: '18' # Enclose the version in quotes to avoid potential parsing issues
+      - name: Install
+        run: npm install
+      - name: Test
+        run: npx wdio config/wdio.browserStack.conf.js
+      - uses: actions/upload-artifact@v2 # Update to the latest version of upload-artifact
+        if: ${{ failure() }} # Correct the syntax for the if condition
+        with:
+          name: logs
+          path: logs
